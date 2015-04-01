@@ -56,13 +56,16 @@ function newPlayer(game, xcoord, ycoord)
 	
 	this.shoot = function(bulletgroup, xset, yset)//xset and yset can be either -1, 0, or 1, indicating direction (if any)
 	{
-		var temp = this.game.add.sprite(this.sprite.x, this.sprite.y, 'purpleShot');
-		this.game.physics.enable(temp, Phaser.Physics.ARCADE);
-		
-		temp.body.velocity.x = this.BSPEED*xset;
-		temp.body.velocity.y = this.BSPEED*yset;
-		bulletgroup.add(temp);
-		this.SHOTS -= 1;
+		if(this.SHOTS > 0)
+		{
+			var temp = this.game.add.sprite(this.sprite.x, this.sprite.y, 'purpleShot');
+			this.game.physics.enable(temp, Phaser.Physics.ARCADE);
+			
+			temp.body.velocity.x = this.BSPEED*xset;
+			temp.body.velocity.y = this.BSPEED*yset;
+			bulletgroup.add(temp);
+			this.SHOTS -= 1;
+		}
 	}
 	
 	/*this.kill = function(playersprite, bulletsprite)
