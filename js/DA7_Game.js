@@ -78,7 +78,25 @@ Lottery.Game.prototype = {
     update: function () {
 		this.game.physics.arcade.overlap(bulletgroup, baddies, EnemyDie, null, this);
 		this.game.physics.arcade.overlap(bulletgroup, layer, bulletKill, null, this);
-		
+	////Input Handlers/////////////////////////////////////////////////////////////////////////////////		
+		if(leftKey.isDown || aKey.isDown)
+		{
+			player.shoot(bulletgroup, -1, 0);
+		}
+		else if(rightKey.isDown || dKey.isDown)
+		{
+			player.shoot(bulletgroup, 1, 0);
+		}
+		else if(downKey.isDown || sKey.isDown)
+		{
+			player.shoot(bulletgroup, 0, 1);
+		}
+		else if(upKey.isDown || wKey.isDown)
+		{
+			player.shoot(bulletgroup, 0, -1);
+		}
+		else{}//do nothing
+	////Time-set Handlers//////////////////////////////////////////////////////////////////////	
 		if(this.game.time.now-timeMark > 4000)
 		{
 			dirFlag = true;
@@ -136,8 +154,8 @@ function newEnemy(game)
 function EnemyDirectionSet(enemysprite, game)
 {
 	var angle = game.rnd.integerInRange(1, 360);
-	enemysprite.body.velocity.x = ENEMYSPEED*cos(angle);
-	enemysprite.body.velocity.y = ENEMYSPEED*sin(angle);
+	enemysprite.body.velocity.x = ENEMYSPEED*Math.cos(angle);
+	enemysprite.body.velocity.y = ENEMYSPEED*Math.sin(angle);
 }
 
 function Enemy(game, xcoord, ycoord)

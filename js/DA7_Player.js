@@ -2,6 +2,7 @@ function newPlayer(game, xcoord, ycoord)
 {
 	this.game = game;
 	this.sprite = this.game.add.sprite(xcoord, ycoord, 'purpleBlock');
+	this.BSPEED = 500;
 	/*this.game.physics.enable(this.sprite, Phaser.Physics.ARCADE);
 	this.MAX_SPEED = 500; // pixels/second
     this.ACCELERATION = 1500; // pixels/second/second
@@ -47,12 +48,13 @@ function newPlayer(game, xcoord, ycoord)
 	
 	//this.teleport = function(player*/
 	
-	this.shoot = function(bulletgroup)
+	this.shoot = function(bulletgroup, xset, yset)//xset and yset can be either -1, 0, or 1, indicating direction (if any)
 	{
 		var temp = this.game.add.sprite(this.sprite.x, this.sprite.y, 'purpleShot');
 		this.game.physics.enable(temp, Phaser.Physics.ARCADE);
-		temp.body.velocity.x = this.sprite.body.velocity.x;
-		temp.body.velocity.y = 300;
+		
+		temp.body.velocity.x = this.BSPEED*xset;
+		temp.body.velocity.y = this.BSPEED*yset;
 		bulletgroup.add(temp);
 	}
 	
