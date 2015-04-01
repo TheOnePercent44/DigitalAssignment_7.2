@@ -81,7 +81,7 @@ Lottery.Game.prototype = {
 			dirFlag = true;
 		}
 		baddies.forEachAlive(EnemyUpdate, this, this);//does update with dirFlag either true or false
-		if(shootFlag)
+		if(dirFlag)
 		{
 			timeMark = this.game.time.now;
 			dirFlag = false;
