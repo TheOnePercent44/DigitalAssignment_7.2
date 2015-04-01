@@ -162,7 +162,7 @@ function newEnemy(game)
 	
 	var hume = new Enemy(game, xcoord, ycoord);
 	game.physics.enable(hume, Phaser.Physics.ARCADE);
-	hume.body.bounce = 1;
+	hume.body.bounce.set(1);
 	while(game.physics.arcade.overlap(hume, baddies))//game.physics.arcade.collide(hume, layer) || 
 	{
 		xcoord = game.rnd.integerInRange(64, 608);//removed collision checks for player and layer from above for now
