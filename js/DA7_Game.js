@@ -55,8 +55,8 @@ Lottery.Game.prototype = {
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 		index = this.game.rnd.integerInRange(1, LOCS)-1;
 		player = new newPlayer(this.game, xlocs[index], ylocs[index]);
-		this.game.camera.follow(player.sprite, this.game.camera.FOLLOW_PLATFORMER);
-		this.game.camera.width = 800;//dangerous use of camera.width?
+		//this.game.camera.follow(player.sprite, this.game.camera.FOLLOW_PLATFORMER);
+		//this.game.camera.width = 800;//dangerous use of camera.width?
 		
 		baddies = this.game.add.group();
 		baddies.enableBody = true;
