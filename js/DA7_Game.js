@@ -28,7 +28,7 @@ var LOCS, index;
 var layer, map, leftKey, rightKey, spaceKey, upKey, downKey, aKey, sKey, dKey, wKey;
 var player, baddies, bulletgroup;
 var timeMark, dirFlag, portMark;
-var ENEMYSPEED;
+var ENEMYSPEED, isShooting;
 Lottery.Game.prototype = {
     create: function () {
 	////Initialize/////////////////////////////////////////////////////////////////////////////////////
@@ -36,6 +36,7 @@ Lottery.Game.prototype = {
 		ylocs = [3*32, 3*32, 5*32, 5*32, 5*32, 5*32, 10*32, 10*32, 10*32, 10*32, 11*32, 11*32, 11*32, 11*32, 16*32, 16*32, 16*32, 16*32, 18*32, 18*32];
 		LOCS = 20;
 		ENEMYSPEED = 300;
+		isShooting = false;
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 		leftKey = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
 		rightKey = this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
@@ -68,6 +69,15 @@ Lottery.Game.prototype = {
 			baddies.add(newEnemy(this.game));
 		}
 	///////////////////////////////////////////////////////////////////////////////////////////////////
+		/*wKey.onDown.add(fire, this);
+		aKey.onDown.add(fire, this);
+		dKey.onDown.add(fire, this);
+		sKey.onDown.add(fire, this);
+		leftKey.onDown.add(fire, this);
+		rightKey.onDown.add(fire, this);
+		downKey.onDown.add(fire, this);
+		upKey.onDown.add(fire, this);*/
+	///////////////////////////////////////////////////////////////////////////////////////////////////
 		bulletgroup = this.game.add.group();
 		bulletgroup.enableBody = true;
 	///////////////////////////////////////////////////////////////////////////////////////////////////	
@@ -79,23 +89,31 @@ Lottery.Game.prototype = {
 		this.game.physics.arcade.overlap(bulletgroup, baddies, EnemyDie, null, this);
 		this.game.physics.arcade.overlap(bulletgroup, layer, bulletKill, null, this);
 	////Input Handlers/////////////////////////////////////////////////////////////////////////////////		
-		if(leftKey.isDown || aKey.isDown)
+		if(!isShooting && (leftKey.isDown || aKey.isDown))
 		{
 			player.shoot(bulletgroup, -1, 0);
+			isShooting = true;
 		}
-		else if(rightKey.isDown || dKey.isDown)
+		else if(!isShooting && (rightKey.isDown || dKey.isDown))
 		{
 			player.shoot(bulletgroup, 1, 0);
+			isShooting = true;
 		}
-		else if(downKey.isDown || sKey.isDown)
+		else if(!isShooting && (downKey.isDown || sKey.isDown))
 		{
 			player.shoot(bulletgroup, 0, 1);
+			isShooting = true;
 		}
-		else if(upKey.isDown || wKey.isDown)
+		else if(!isShooting && (upKey.isDown || wKey.isDown))
 		{
 			player.shoot(bulletgroup, 0, -1);
+			isShooting = true;
 		}
 		else{}//do nothing
+		if(!leftKey.isDown && !rightKey.isDown && !downKey.isDown && !upKey.isDown && !aKey.isDown && !sKey.isDown && !dKey.isDown && !wKey.isDown)
+		{
+			isShooting = false;
+		}
 	////Time-set Handlers//////////////////////////////////////////////////////////////////////	
 		if(this.game.time.now-timeMark > 4000)
 		{
@@ -128,6 +146,11 @@ Lottery.Game.prototype = {
     }
 
 };
+
+/*function fire(key)
+{
+	
+};*/
 
 function newEnemy(game)
 {
@@ -165,7 +188,10 @@ function Enemy(game, xcoord, ycoord)
 
 function EnemyUpdate(enemysprite, game)
 {
-	EnemyDirectionSet(enemysprite, game);
+	if(dirFlag)
+	{
+		EnemyDirectionSet(enemysprite, game);
+	}
 };
 
 function teleport(game)
