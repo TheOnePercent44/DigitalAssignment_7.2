@@ -23,7 +23,9 @@ Lottery.Game = function (game) {
     //  But do consider them as being 'reserved words', i.e. don't create a property for your own game called "world" or you'll over-write the world reference.
 
 };
-
+var xlocs = [3*32, 18*32, 5*32, 10*32, 11*32, 16*32, 5*32, 10*32, 11*32, 16*32, 5*32, 10*32, 11*32, 16*32, 5*32, 10*32, 11*32, 16*32, 3*32, 18*32];
+var ylocs = [3*32, 3*32, 5*32, 5*32, 5*32, 5*32, 10*32, 10*32, 10*32, 10*32, 11*32, 11*32, 11*32, 11*32, 16*32, 16*32, 16*32, 16*32, 18*32, 18*32];
+var LOCS = 20, index;
 var layer, map, leftKey, rightKey, spaceKey, upKey, downKey, aKey, sKey, dKey, wKey;
 var player, baddies, bulletgroup;
 var timeMark, dirFlag;
@@ -51,7 +53,8 @@ Lottery.Game.prototype = {
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 		this.game.physics.arcade.gravity.y = 300;//300;
 	///////////////////////////////////////////////////////////////////////////////////////////////////
-		player = new newPlayer(this.game, this.game.rnd.integerInRange(0, 3168), 192);
+		index = this.game.rnd.integerInRange(1, LOCS)-1;
+		player = new newPlayer(this.game, xlocs[index], ylocs[index]);
 		this.game.camera.follow(player.sprite, this.game.camera.FOLLOW_PLATFORMER);
 		this.game.camera.width = 800;//dangerous use of camera.width?
 		
