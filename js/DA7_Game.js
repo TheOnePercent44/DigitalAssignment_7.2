@@ -140,7 +140,7 @@ Lottery.Game.prototype = {
 		{
 			//this.state.start('WinScreen');
 			var score = 30+player.getShots()-baddies.countLiving();
-			var text = this.game.add.text(704/8, 704/4, "GAME OVER\nScore: "+score, { font: "65px Arial", fill: "#ff0044", align: "center" });
+			var text = this.game.add.text(704/4, 704/4, "GAME OVER\nScore: "+score, { font: "65px Arial", fill: "#ff0044", align: "center" });
 		}
     },
 
