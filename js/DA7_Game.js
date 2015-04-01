@@ -88,6 +88,7 @@ Lottery.Game.prototype = {
     update: function () {
 		this.game.physics.arcade.overlap(bulletgroup, baddies, EnemyDie, null, this);
 		this.game.physics.arcade.overlap(bulletgroup, layer, bulletKill, null, this);
+		this.game.physics.collide(baddies, layer);//COLLIDE
 	////Input Handlers/////////////////////////////////////////////////////////////////////////////////		
 		if(!isShooting && (leftKey.isDown || aKey.isDown))
 		{
