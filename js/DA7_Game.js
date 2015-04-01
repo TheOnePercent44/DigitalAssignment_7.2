@@ -139,7 +139,7 @@ Lottery.Game.prototype = {
 		if(baddies.countLiving() <= 0 || player.getShots() <= 0)
 		{
 			//this.state.start('WinScreen');
-			var text = game.add.text(game.world.centerX, game.world.centerY, "GAME OVER\nEnemies Remaining: "+baddies.countLiving(), { font: "65px Arial", fill: "#ff0044", align: "center" });
+			var text = this.game.add.text(game.world.centerX, game.world.centerY, "GAME OVER\nEnemies Remaining: "+baddies.countLiving(), { font: "65px Arial", fill: "#ff0044", align: "center" });
 		}
     },
 
