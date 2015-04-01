@@ -55,8 +55,6 @@ Lottery.Game.prototype = {
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 		index = this.game.rnd.integerInRange(1, LOCS)-1;
 		player = new newPlayer(this.game, xlocs[index], ylocs[index]);
-		//this.game.camera.follow(player.sprite, this.game.camera.FOLLOW_PLATFORMER);
-		//this.game.camera.width = 800;//dangerous use of camera.width?
 		
 		baddies = this.game.add.group();
 		baddies.enableBody = true;
@@ -68,19 +66,18 @@ Lottery.Game.prototype = {
 		bulletgroup = this.game.add.group();
 		bulletgroup.enableBody = true;
 	///////////////////////////////////////////////////////////////////////////////////////////////////	
+		timeMark= this.game.time.now;
     },
 
     update: function () {
-		//this.game.physics.arcade.overlap(player.sprite, enemybullets, playerDie, null, this);
 		this.game.physics.arcade.overlap(bulletgroup, baddies, EnemyDie, null, this);
-		//this.game.physics.arcade.overlap(bulletgroup, enemybullets, bulletClash, null, this);
 		this.game.physics.arcade.overlap(bulletgroup, layer, bulletKill, null, this);
 		
 		if(this.game.time.now-timeMark > 2000)
 		{
 			dirFlag = true;
 		}
-		baddies.forEachAlive(EnemyUpdate, this, this);//does update with dirFlag either true or false
+		//baddies.forEachAlive(EnemyUpdate, this, this);//does update with dirFlag either true or false
 		if(dirFlag)
 		{
 			timeMark = this.game.time.now;
@@ -112,7 +109,7 @@ function newEnemy(game)
 	
 	var hume = new Enemy(game, xcoord, ycoord);
 	game.physics.enable(hume, Phaser.Physics.ARCADE);
-	hume.body.bouce = 1;
+	hume.body.bounce = 1;
 	while(game.physics.arcade.overlap(hume, baddies))//game.physics.arcade.collide(hume, layer) || 
 	{
 		xcoord = game.rnd.integerInRange(64, 608);//removed collision checks for player and layer from above for now
@@ -131,7 +128,7 @@ function Enemy(game, xcoord, ycoord)
 
 function EnemyUpdate(enemysprite, game)
 {
-	
+	//nothing for now (add movement randomizer here)
 };
 
 function EnemyDie(playerbullet, enemysprite)
