@@ -136,9 +136,10 @@ Lottery.Game.prototype = {
 			timeMark = this.game.time.now;
 			dirFlag = false;
 		}
-		if(baddies.countLiving() <= 0)
+		if(baddies.countLiving() <= 0 || player.getShots() <= 0)
 		{
-			this.state.start('WinScreen');
+			//this.state.start('WinScreen');
+			var text = game.add.text(game.world.centerX, game.world.centerY, "GAME OVER\nEnemies Remaining: "+baddies.countLiving(), { font: "65px Arial", fill: "#ff0044", align: "center" });
 		}
     },
 
