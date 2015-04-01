@@ -37,8 +37,8 @@ Lottery.Game.prototype = {
 		LOCS = 20;
 		ENEMYSPEED = 300;
 		isShooting = false;
-		text = this.game.add.text(15*32, 0, "Ammunition: ", {font: "15px Arial", fill: "#ffffff", align: "left"});
-		text = this.game.add.text(10*32, 0, "Enemies: ", {font: "15px Arial", fill: "#ffffff", align: "left"});		
+		text1 = this.game.add.text(15*32, 0, "Ammunition: ", {font: "15px Arial", fill: "#ffffff", align: "left"});
+		text2 = this.game.add.text(10*32, 0, "Enemies: ", {font: "15px Arial", fill: "#ffffff", align: "left"});		
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 		leftKey = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
 		rightKey = this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
