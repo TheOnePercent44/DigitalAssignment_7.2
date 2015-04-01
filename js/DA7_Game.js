@@ -71,14 +71,6 @@ Lottery.Game.prototype = {
 			baddies.add(newEnemy(this.game));
 		}
 	///////////////////////////////////////////////////////////////////////////////////////////////////
-		/*wKey.onDown.add(fire, this);
-		aKey.onDown.add(fire, this);
-		dKey.onDown.add(fire, this);
-		sKey.onDown.add(fire, this);
-		leftKey.onDown.add(fire, this);
-		rightKey.onDown.add(fire, this);
-		downKey.onDown.add(fire, this);
-		upKey.onDown.add(fire, this);*/
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 		bulletgroup = this.game.add.group();
 		bulletgroup.enableBody = true;
@@ -128,7 +120,7 @@ Lottery.Game.prototype = {
 		if(this.game.time.now-portMark > 1750)
 		{
 			teleport(this.game);
-			portMark = this.game.time.now;
+			portMark = this.game.time.now+this.game.rnd.integerInRange(-1000, 2500);
 		}
 		baddies.forEachAlive(EnemyUpdate, this, this);//does update with dirFlag either true or false
 		if(dirFlag)
