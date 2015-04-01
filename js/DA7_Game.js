@@ -48,7 +48,7 @@ Lottery.Game.prototype = {
 		this.game.physics.startSystem(Phaser.Physics.ARCADE);
 		map = this.game.add.tilemap('map');
 		map.addTilesetImage('greenBlock_32x32', 'greenBlock');
-		map.addTilesetImage('blueBlock_32x32', 'pointTile');
+		map.addTilesetImage('red_ball_32x32', 'pointTile');
 		layer = map.createLayer('Background');
 		layer = map.createLayer('Walls');
 		layer.resizeWorld();
