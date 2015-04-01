@@ -28,7 +28,7 @@ var LOCS, index;
 var layer, map, leftKey, rightKey, spaceKey, upKey, downKey, aKey, sKey, dKey, wKey;
 var player, baddies, bulletgroup;
 var timeMark, dirFlag, portMark;
-var ENEMYSPEED, isShooting, text;
+var ENEMYSPEED, isShooting, text1, text2;
 Lottery.Game.prototype = {
     create: function () {
 	////Initialize/////////////////////////////////////////////////////////////////////////////////////
@@ -38,6 +38,7 @@ Lottery.Game.prototype = {
 		ENEMYSPEED = 300;
 		isShooting = false;
 		text = this.game.add.text(15*32, 0, "Ammunition: ", {font: "15px Arial", fill: "#ffffff", align: "left"});
+		text = this.game.add.text(10*32, 0, "Enemies: ", {font: "15px Arial", fill: "#ffffff", align: "left"});		
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 		leftKey = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
 		rightKey = this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
@@ -91,7 +92,8 @@ Lottery.Game.prototype = {
 		this.game.physics.arcade.overlap(bulletgroup, layer, bulletKill, null, this);
 		this.game.physics.arcade.collide(baddies, layer);//COLLIDE
 		
-		text.text = "Ammunition: " + player.getShots();
+		text1.text = "Ammunition: " + player.getShots();
+		text2.text = "Enemies: " + baddies.countLiving();
 	////Input Handlers/////////////////////////////////////////////////////////////////////////////////		
 		if(!isShooting && (leftKey.isDown || aKey.isDown))
 		{
@@ -134,7 +136,7 @@ Lottery.Game.prototype = {
 			timeMark = this.game.time.now;
 			dirFlag = false;
 		}
-		if(baddies.countLiving <= 0)
+		if(baddies.countLiving() <= 0)
 		{
 			this.state.start('WinScreen');
 		}

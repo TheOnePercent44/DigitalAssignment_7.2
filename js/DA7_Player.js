@@ -51,7 +51,7 @@ function newPlayer(game, xcoord, ycoord)
 	
 	this.getShots = function()
 	{
-		return this.shots;
+		return this.SHOTS;
 	}
 	
 	this.shoot = function(bulletgroup, xset, yset)//xset and yset can be either -1, 0, or 1, indicating direction (if any)
@@ -62,7 +62,7 @@ function newPlayer(game, xcoord, ycoord)
 		temp.body.velocity.x = this.BSPEED*xset;
 		temp.body.velocity.y = this.BSPEED*yset;
 		bulletgroup.add(temp);
-		this.shots -= 1;
+		this.SHOTS -= 1;
 	}
 	
 	/*this.kill = function(playersprite, bulletsprite)
