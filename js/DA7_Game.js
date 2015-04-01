@@ -124,7 +124,7 @@ function newEnemy(game)
 	ycoord = game.rnd.integerInRange(64, 608);
 	
 	var hume = new Enemy(game, xcoord, ycoord);
-	game.physics.enable(hume, Phase.Physics.ARCADE);
+	game.physics.enable(hume, Phaser.Physics.ARCADE);
 	hume.body.bouce = 1;
 	while(game.physics.arcade.overlap(hume, baddies))//game.physics.arcade.collide(hume, layer) || 
 	{
