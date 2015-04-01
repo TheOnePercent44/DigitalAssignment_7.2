@@ -27,7 +27,7 @@ var xlocs, ylocs;
 var LOCS, index;
 var layer, map, leftKey, rightKey, spaceKey, upKey, downKey, aKey, sKey, dKey, wKey;
 var player, baddies, bulletgroup;
-var timeMark, dirFlag;
+var timeMark, dirFlag, portMark;
 Lottery.Game.prototype = {
     create: function () {
 	////Initialize/////////////////////////////////////////////////////////////////////////////////////
@@ -54,7 +54,7 @@ Lottery.Game.prototype = {
 		layer.resizeWorld();
 		map.setCollision(1, true, 'Walls', true);
 	///////////////////////////////////////////////////////////////////////////////////////////////////
-		this.game.physics.arcade.gravity.y = 300;//300;
+		//this.game.physics.arcade.gravity.y = 300;//300;
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 		index = this.game.rnd.integerInRange(1, LOCS)-1;
 		player = new newPlayer(this.game, xlocs[index], ylocs[index]);
@@ -69,16 +69,22 @@ Lottery.Game.prototype = {
 		bulletgroup = this.game.add.group();
 		bulletgroup.enableBody = true;
 	///////////////////////////////////////////////////////////////////////////////////////////////////	
-		timeMark= this.game.time.now;
+		timeMark = this.game.time.now;
+		portMark = this.game.time.now;
     },
 
     update: function () {
 		this.game.physics.arcade.overlap(bulletgroup, baddies, EnemyDie, null, this);
 		this.game.physics.arcade.overlap(bulletgroup, layer, bulletKill, null, this);
 		
-		if(this.game.time.now-timeMark > 2000)
+		if(this.game.time.now-timeMark > 4000)
 		{
 			dirFlag = true;
+		}
+		if(this.game.time.now-portMark > 1750)
+		{
+			teleport(this.game);
+			portMark = this.game.time.now;
 		}
 		//baddies.forEachAlive(EnemyUpdate, this, this);//does update with dirFlag either true or false
 		if(dirFlag)
@@ -134,6 +140,13 @@ function EnemyUpdate(enemysprite, game)
 	//nothing for now (add movement randomizer here)
 };
 
+function teleport(game)
+{
+	index = game.rnd.integerInRange(1, LOCS)-1;
+	player.sprite.x = xlocs[index];
+	player.sprite.y = ylocs[index];
+};
+
 function EnemyDie(playerbullet, enemysprite)
 {
 	enemysprite.kill();
@@ -143,33 +156,9 @@ function EnemyDie(playerbullet, enemysprite)
 function bulletKill(playerbullet, layer)
 {
 	playerbullet.kill();
-}
-
-function bulletClash(playerbullet, bulletsprite)
-{
-	playerbullet.kill();
-	bulletsprite.kill();
-};
-
-function playerDie(playersprite, bulletsprite)//wrapper to use state change
-{
-	//console.log("in playerDie");//debug
-	player.sprite.kill();
-	bulletsprite.kill();
-	this.state.start('LoseScreen');
 };
 
 function playerShoot()
 {
 	player.shoot(bulletgroup);
-};
-
-function movePlayerLeft()
-{
-	LBflag = !LBflag;
-};
-
-function movePlayerRight()
-{
-	RBflag = !RBflag;
 };
