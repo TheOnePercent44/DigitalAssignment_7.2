@@ -23,14 +23,17 @@ Lottery.Game = function (game) {
     //  But do consider them as being 'reserved words', i.e. don't create a property for your own game called "world" or you'll over-write the world reference.
 
 };
-var xlocs = [3*32, 18*32, 5*32, 10*32, 11*32, 16*32, 5*32, 10*32, 11*32, 16*32, 5*32, 10*32, 11*32, 16*32, 5*32, 10*32, 11*32, 16*32, 3*32, 18*32];
-var ylocs = [3*32, 3*32, 5*32, 5*32, 5*32, 5*32, 10*32, 10*32, 10*32, 10*32, 11*32, 11*32, 11*32, 11*32, 16*32, 16*32, 16*32, 16*32, 18*32, 18*32];
-var LOCS = 20, index;
+var xlocs, ylocs;
+var LOCS, index;
 var layer, map, leftKey, rightKey, spaceKey, upKey, downKey, aKey, sKey, dKey, wKey;
 var player, baddies, bulletgroup;
 var timeMark, dirFlag;
 Lottery.Game.prototype = {
     create: function () {
+	////Initialize/////////////////////////////////////////////////////////////////////////////////////
+		xlocs = [3*32, 18*32, 5*32, 10*32, 11*32, 16*32, 5*32, 10*32, 11*32, 16*32, 5*32, 10*32, 11*32, 16*32, 5*32, 10*32, 11*32, 16*32, 3*32, 18*32];
+		ylocs = [3*32, 3*32, 5*32, 5*32, 5*32, 5*32, 10*32, 10*32, 10*32, 10*32, 11*32, 11*32, 11*32, 11*32, 16*32, 16*32, 16*32, 16*32, 18*32, 18*32];
+		LOCS = 20;
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 		leftKey = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
 		rightKey = this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
