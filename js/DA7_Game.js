@@ -28,12 +28,14 @@ var LOCS, index;
 var layer, map, leftKey, rightKey, spaceKey, upKey, downKey, aKey, sKey, dKey, wKey;
 var player, baddies, bulletgroup;
 var timeMark, dirFlag, portMark;
+var ENEMYSPEED;
 Lottery.Game.prototype = {
     create: function () {
 	////Initialize/////////////////////////////////////////////////////////////////////////////////////
 		xlocs = [3*32, 18*32, 5*32, 10*32, 11*32, 16*32, 5*32, 10*32, 11*32, 16*32, 5*32, 10*32, 11*32, 16*32, 5*32, 10*32, 11*32, 16*32, 3*32, 18*32];
 		ylocs = [3*32, 3*32, 5*32, 5*32, 5*32, 5*32, 10*32, 10*32, 10*32, 10*32, 11*32, 11*32, 11*32, 11*32, 16*32, 16*32, 16*32, 16*32, 18*32, 18*32];
 		LOCS = 20;
+		ENEMYSPEED = 300;
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 		leftKey = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
 		rightKey = this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
@@ -86,7 +88,7 @@ Lottery.Game.prototype = {
 			teleport(this.game);
 			portMark = this.game.time.now;
 		}
-		//baddies.forEachAlive(EnemyUpdate, this, this);//does update with dirFlag either true or false
+		baddies.forEachAlive(EnemyUpdate, this, this);//does update with dirFlag either true or false
 		if(dirFlag)
 		{
 			timeMark = this.game.time.now;
@@ -126,9 +128,17 @@ function newEnemy(game)
 		hume.kill();
 		hume.reset(xcoord, ycoord);
 	}
+	EnemyDirectionSet(hume, game);
 	
 	return hume;//hume is a sprite
 };
+
+function EnemyDirectionSet(enemysprite, game)
+{
+	var angle = game.rnd.integerInRange(1, 360);
+	enemysprite.body.velocity.x = ENEMYSPEED*cos(angle);
+	enemysprite.body.velocity.y = ENEMYSPEED*sin(angle);
+}
 
 function Enemy(game, xcoord, ycoord)
 {
@@ -137,7 +147,7 @@ function Enemy(game, xcoord, ycoord)
 
 function EnemyUpdate(enemysprite, game)
 {
-	//nothing for now (add movement randomizer here)
+	EnemyDirectionSet(enemysprite, game);
 };
 
 function teleport(game)
