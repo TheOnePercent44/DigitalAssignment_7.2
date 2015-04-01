@@ -73,18 +73,6 @@ Lottery.Game.prototype = {
 		//this.game.physics.arcade.overlap(bulletgroup, enemybullets, bulletClash, null, this);
 		this.game.physics.arcade.overlap(bulletgroup, layer, bulletKill, null, this);
 		
-		if(RBflag)//rightKey.isDown || 
-		{
-			player.moveRight();
-		}
-		else if(LBflag)//leftKey.isDown || 
-		{
-			player.moveLeft();
-		}
-		else
-		{
-			player.idle();
-		}
 		if(this.game.time.now-timeMark > 2000)
 		{
 			dirFlag = true;
@@ -144,16 +132,7 @@ function Enemy(game, xcoord, ycoord)
 
 function EnemyUpdate(enemysprite, game)
 {
-	if(enemysprite.inCamera && shootFlag)//(enemysprite.inWorld
-	{
-		var rotation = this.game.math.angleBetween(enemysprite.x, enemysprite.y,player.sprite.x, player.sprite.y);
-		
-		var temp = this.game.add.sprite(enemysprite.x, enemysprite.y, 'redShot');
-		this.game.physics.enable(temp, Phaser.Physics.ARCADE);
-		temp.body.velocity.x = Math.cos(rotation) * 350;//change the number to make faster and whatnot
-		temp.body.velocity.y = Math.sin(rotation) * 350;
-		enemybullets.add(temp);
-	}
+	
 };
 
 function EnemyDie(playerbullet, enemysprite)
