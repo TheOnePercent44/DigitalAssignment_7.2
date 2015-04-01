@@ -90,10 +90,6 @@ Lottery.Game.prototype = {
 		{
 			this.state.start('WinScreen');
 		}
-		//update button positions
-		yellowSB.x = this.game.camera.x+(this.game.camera.width/2)-16;
-		orangeLB.x = yellowSB.x-38;
-		orangeRB.x = yellowSB.x+38;
     },
 
     quitGame: function (pointer) {
